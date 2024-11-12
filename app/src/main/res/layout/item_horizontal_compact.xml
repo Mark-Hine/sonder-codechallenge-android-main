@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchHorizontalCompactContainer"
+        android:layout_width="@dimen/spaceX13"
+        android:layout_height="@dimen/spaceX10"
+        android:layout_marginEnd="@dimen/space"
+        android:backgroundTint="@color/gray_light_3"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/space"
+        app:cardElevation="0dp">
+
+        <TextView
+            android:id="@+id/searchItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:breakStrategy="simple"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="3"
+            android:minLines="1"
+            android:padding="@dimen/space"
+            android:textStyle="bold"
+            tools:text="Knowing your workplace relationship between" />
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,0 +1,53 @@
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+out/
+build/
+.gradle/
+
+# Project files
+*.iml
+.idea/
+# .idea/workspace.xml
+captures/
+
+# Local configuration file (sdk path, etc)
+local.properties
+keystore.properties
+
+# Windows thumbnail db
+.DS_Store
+
+# Idea non-crucial project fileS
+*.iws
+
+# Sandbox stuff
+_sandbox
+
+secret.xml
+
+#AWS configs
+awsconfiguration.json
+amplifyconfiguration.json
+amplify_config_dev.json
+amplify_config_prod.json
+amplify_config_stg.json
+amplify_sso_config_dev.json
+amplify_sso_config_prod.json
+amplify_sso_config_stg.json
+
+#Braze Configs
+braze.xml
+
+*.keystore
+*.jks

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/searchHorizontalDetailContainer"
+        android:layout_width="@dimen/spaceX31"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/spaceX1n5"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="@drawable/bg_stroke_corner_8dp"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space">
+
+            <ImageView
+                android:id="@+id/searchItemImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spaceX16"
+                android:adjustViewBounds="true"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_corners_8dp"
+                android:foregroundTint="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@color/gray_light_1" />
+
+            <ImageView
+                android:id="@+id/searchItemMediaIcon"
+                android:layout_width="@dimen/spaceX5"
+                android:layout_height="@dimen/spaceX5"
+                android:importantForAccessibility="no"
+                app:layout_constraintBottom_toBottomOf="@+id/searchItemImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_video" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/searchItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spaceX2"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingTop="@dimen/space"
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/searchItemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/spaceX2"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            tools:maxLines="8"
+            tools:text="@tools:sample/lorem/random" />
+
+        <LinearLayout
+            android:id="@+id/layoutCtaDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spaceX2">
+
+            <TextView
+                android:id="@+id/searchItemCtaButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem" />
+
+            <ImageView
+                android:id="@+id/searchItemDurationIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_half"
+                android:importantForAccessibility="no"
+                app:tint="@color/teal_700"
+                tools:src="@drawable/ic_video" />
+
+            <TextView
+                android:id="@+id/searchItemContentType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="@tools:sample/lorem" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
