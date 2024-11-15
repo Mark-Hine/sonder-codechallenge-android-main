@@ -21,29 +21,29 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val clearSearchResultsUseCase: ClearSearchResultsUseCase,
-    private val getSectionSearchResultsUseCase: GetSectionSearchResultsUseCase,
+	private val clearSearchResultsUseCase: ClearSearchResultsUseCase,
+	private val getSectionSearchResultsUseCase: GetSectionSearchResultsUseCase,
 ) : ViewModel() {
 
-    private var getAllSectionSearchResultsJob: Job? = null
-    private val _state: MutableStateFlow<SearchActivityStates> = MutableStateFlow(SearchActivityStates.Started)
-    val state = _state.asStateFlow()
+	private var getAllSectionSearchResultsJob: Job? = null
+	private val _state: MutableStateFlow<SearchActivityStates> = MutableStateFlow(SearchActivityStates.Started)
+	val state = _state.asStateFlow()
 
-    fun updateSearchQuery(query: String) {
-        clearSearchResults()
-	    getSectionSearchResults(query)
-    }
+	fun updateSearchQuery(query: String) {
+		clearSearchResults()
+		getSectionSearchResults(query)
+	}
 
-    fun clearSearchQuery() {
-        clearSearchResults()
-	    _state.update { SearchActivityStates.Started }
-    }
+	fun clearSearchQuery() {
+		clearSearchResults()
+		_state.update { SearchActivityStates.Started }
+	}
 
-    private fun clearSearchResults() {
-        viewModelScope.launch {
-            clearSearchResultsUseCase.execute(Unit)
-        }
-    }
+	private fun clearSearchResults() {
+		viewModelScope.launch {
+			clearSearchResultsUseCase.execute(Unit)
+		}
+	}
 
 	private fun getSectionSearchResults(query: String) {
 		// Search all the sections by using the SearchItemViewType enum
