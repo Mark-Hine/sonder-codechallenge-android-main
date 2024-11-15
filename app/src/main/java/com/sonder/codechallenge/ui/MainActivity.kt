@@ -21,7 +21,7 @@ import com.sonder.codechallenge.databinding.ActivityMainBinding
 import com.sonder.codechallenge.ui.theme.SonderCodeChallengeTheme
 import com.sonder.codechallenge.utils.repeatOnLifecycleWhenResumed
 import com.sonder.common.safeString
-import com.sonder.domain.models.SearchSectionResult
+import com.sonder.data.models.SearchSectionResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

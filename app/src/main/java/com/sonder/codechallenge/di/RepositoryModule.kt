@@ -1,7 +1,7 @@
 package com.sonder.codechallenge.di
 
-import com.sonder.domain.repositories.SearchRepository
-import com.sonder.domain.repositories.SearchRepositoryImpl
+import com.sonder.data.repositories.SearchRepository
+import com.sonder.data.repositories.SearchRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

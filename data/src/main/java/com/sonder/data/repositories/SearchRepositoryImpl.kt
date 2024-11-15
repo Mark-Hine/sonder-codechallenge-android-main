@@ -1,4 +1,4 @@
-package com.sonder.domain.repositories
+package com.sonder.data.repositories
 
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

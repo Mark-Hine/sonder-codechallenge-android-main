@@ -1,4 +1,4 @@
-package com.sonder.domain.models
+package com.sonder.data.models
 
 enum class SearchActionType(val value: String) {
     ARTICLE("article"),
