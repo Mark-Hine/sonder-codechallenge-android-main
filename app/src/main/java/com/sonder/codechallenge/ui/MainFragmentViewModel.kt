@@ -1,5 +1,6 @@
 package com.sonder.codechallenge.ui
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.sonder.codechallenge.ui.base.BaseViewModel
@@ -34,7 +35,8 @@ class MainFragmentViewModel @Inject constructor(
 			.launchIn(viewModelScope)
 	}
 
-	private fun getSectionSearchResults(query: String) {
+	@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+	fun getSectionSearchResults(query: String) {
 		// Get the search results for the given section
 		val params = GetSectionSearchResultsUseCase.Params(
 			searchItemViewType = searchItemViewType,
