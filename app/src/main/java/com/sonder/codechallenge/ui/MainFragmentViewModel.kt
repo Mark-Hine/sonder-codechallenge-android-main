@@ -73,4 +73,4 @@ class MainFragmentViewModel @Inject constructor(
 
 }
 
-private const val SEARCH_ITEM_VIEW_TYPE = "searchItemViewType"
+internal const val SEARCH_ITEM_VIEW_TYPE = "searchItemViewType"

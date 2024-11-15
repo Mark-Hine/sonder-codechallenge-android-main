@@ -24,7 +24,7 @@ sealed interface SearchActivityStates {
 	 */
 	data class Loaded(
 		val query: String,
-		val sections: List<SearchItemViewType>,
+		val searchItemViewTypes: List<SearchItemViewType>,
 	) : SearchActivityStates
 
 	/**
