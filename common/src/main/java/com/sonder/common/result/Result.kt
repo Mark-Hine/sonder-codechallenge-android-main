@@ -18,8 +18,8 @@ sealed class Result<out T> {
 fun <T> Flow<T>.asResult(): Flow<Result<T>> = map<T, Result<T>> { Result.Success(it) }
 	.onStart { emit(Result.Loading) }
 	.catch {
-		// Log error (could switch this for Timber or another logging library)
-		Log.e("Result", "Error: $it")
+		// Log error (could switch this for Timber or another logging library, causes Unit test to hang, needs mocking)
+		//Log.e("Result", "Error: $it")
 		// Emit error
 		emit(Result.Error(it))
 	}
