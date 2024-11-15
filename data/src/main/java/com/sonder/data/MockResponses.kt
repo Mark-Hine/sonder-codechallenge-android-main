@@ -1,10 +1,10 @@
 package com.sonder.data
 
-import com.sonder.domain.models.SearchAction
-import com.sonder.domain.models.SearchActionType
-import com.sonder.domain.models.SearchContentType
-import com.sonder.domain.models.SearchItem
-import com.sonder.domain.models.SearchSectionResult
+import com.sonder.data.models.SearchAction
+import com.sonder.data.models.SearchActionType
+import com.sonder.data.models.SearchContentType
+import com.sonder.data.models.SearchItem
+import com.sonder.data.models.SearchSectionResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

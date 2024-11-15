@@ -1,7 +1,7 @@
 package com.sonder.data
 
-import com.sonder.domain.models.SearchContentType
-import com.sonder.domain.models.SearchRequestParams
+import com.sonder.data.models.SearchContentType
+import com.sonder.data.models.SearchRequestParams
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

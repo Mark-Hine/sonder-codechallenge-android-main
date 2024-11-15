@@ -1,6 +1,6 @@
 package com.sonder.domain.usecases.search
 
-import com.sonder.domain.repositories.SearchRepository
+import com.sonder.data.repositories.SearchRepository
 import com.sonder.domain.usecases.base.FlowUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

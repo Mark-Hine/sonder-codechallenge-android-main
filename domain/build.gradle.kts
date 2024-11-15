@@ -22,10 +22,12 @@ android {
 }
 
 dependencies {
+    api(project(":data"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
     testImplementation(libs.junit)
 }
 

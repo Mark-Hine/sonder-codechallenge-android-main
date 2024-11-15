@@ -1,4 +1,4 @@
-package com.sonder.domain.models
+package com.sonder.data.models
 
 data class SearchAction(
     val scheme: String,
