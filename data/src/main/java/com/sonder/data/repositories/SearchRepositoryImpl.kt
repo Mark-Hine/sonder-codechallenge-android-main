@@ -4,6 +4,7 @@ import com.sonder.data.MockRequests
 import com.sonder.data.MockResponses
 import com.sonder.data.models.SearchRequestParams
 import com.sonder.data.models.SearchSectionResult
+import com.sonder.data.models.applyParamFilters
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -76,16 +77,4 @@ class SearchRepositoryImpl @Inject constructor() : SearchRepository {
         )
     }
 
-    /**
-     * Applies filters to the [SearchSectionResult] based on the [SearchRequestParams].
-     */
-    private fun SearchSectionResult.applyParamFilters(params: SearchRequestParams): SearchSectionResult {
-        // Filter the items based on the content types and limit the number of items by the params size
-        val filteredItems = items.filter { item ->
-            item.contentType != null && params.contentTypes.contains(item.contentType.value)
-        }.take(params.size)
-
-        // Return a new search section result with the filtered items
-        return copy(items = filteredItems)
-    }
 }
