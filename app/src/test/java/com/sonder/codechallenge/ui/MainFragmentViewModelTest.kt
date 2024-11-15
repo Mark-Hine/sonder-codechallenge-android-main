@@ -67,4 +67,23 @@ class MainFragmentViewModelTest {
 		val actualState = viewModel.state.take(2).last()
 		assertEquals(expectedStateLoaded, actualState)
 	}
+
+	@Test
+	fun applyParamFilters_filtersItemsCorrectly() = runTest {
+		// Arrange
+		val request = MockRequests.horizontalCompactRequestParams
+		val result = MockResponses.getHorizontalCompactSearchResults().first()
+		val expectedContentTypes = request.contentTypes
+		val expectedSize = request.size
+
+		// Act
+		val filteredResult = result.applyParamFilters(request)
+
+		// Assert
+		val actualSize = filteredResult.items.size
+		assertEquals(expectedSize, actualSize)
+		val actualContentTypes = filteredResult.items.map { it.contentType?.value }.distinct()
+		assertEquals(expectedContentTypes, actualContentTypes)
+	}
+
 }
