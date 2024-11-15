@@ -25,7 +25,7 @@ class MainFragmentViewModel @Inject constructor(
 	private val getSectionSearchResultsUseCase: GetSectionSearchResultsUseCase,
 ) : ViewModel() {
 
-	private val searchItemViewType: SearchItemViewType = requireNotNull(savedStateHandle[SEARCH_ITEM_VIEW_TYPE])
+	val searchItemViewType: SearchItemViewType = requireNotNull(savedStateHandle[SEARCH_ITEM_VIEW_TYPE])
 	private var getSectionSearchResultsJob: Job? = null
 	private val _state: MutableStateFlow<SearchFragmentStates> = MutableStateFlow(SearchFragmentStates.Started)
 	val state = _state.asStateFlow()
