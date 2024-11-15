@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Sonder Code Challenge</string>
     <string name="hint_search">Search</string>
+    <string name="initial_search_results_message">Search our comprehensive library of resources</string>
+    <string name="loading_search_results_message">Searching for ‘%s’</string>
+    <string name="loaded_search_results_message">Showing results for ‘%s’</string>
+    <string name="empty_search_results_message">We apologise, but it seems like we’re facing a temporary hiccup loading search results.</string>
+    <string name="error_search_results_message">An error occurred while loading search results. Please try again later.</string>
 </resources>
