@@ -1,22 +1,45 @@
 package com.sonder.codechallenge.ui
 
+import androidx.lifecycle.SavedStateHandle
+import com.sonder.codechallenge.ui.util.MainDispatcherRule
+import com.sonder.data.repositories.SearchRepositoryImpl
+import com.sonder.domain.usecases.search.ClearSearchResultsUseCase
+import com.sonder.domain.usecases.search.GetSectionSearchResultsUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class MainActivityViewModelTest {
 
-    private lateinit var viewModel: MainActivityViewModel
+	@get:Rule
+	val dispatcherRule = MainDispatcherRule()
 
-    @Test
-    fun onCreate() {
-    }
+	private val searchRepository = SearchRepositoryImpl()
+	private val clearSearchResultsUseCase = ClearSearchResultsUseCase(searchRepository)
+	private val getSectionSearchResultsUseCase = GetSectionSearchResultsUseCase(searchRepository)
 
-    @Test
-    fun updateSearchQuery() {
-    }
+	private lateinit var viewModel: MainActivityViewModel
 
-    @Test
-    fun clearSearchQuery() {
-    }
+	@Before
+	fun setup() {
+		viewModel = MainActivityViewModel(
+			savedStateHandle = SavedStateHandle(),
+			clearSearchResultsUseCase = clearSearchResultsUseCase,
+			getSectionSearchResultsUseCase = getSectionSearchResultsUseCase,
+		)
+	}
+
+	@Test
+	fun onCreate() {
+	}
+
+	@Test
+	fun updateSearchQuery() {
+	}
+
+	@Test
+	fun clearSearchQuery() {
+	}
 }
