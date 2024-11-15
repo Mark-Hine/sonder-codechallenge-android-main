@@ -68,6 +68,26 @@ class MainActivityViewModelTest {
 	}
 
 	@Test
+	fun stateIsLoaded_withTestSearchQuery() = runTest {
+		// Arrange
+		val query = "test"
+		val expectedStateLoading = SearchActivityStates.Loading(query)
+		val expectedStateLoaded = SearchActivityStates.Loaded(
+			query = query,
+			searchItemViewTypes = emptyList(),
+		)
+		val stateFlow = viewModel.state
+
+		// Act
+		viewModel.updateSearchQuery(query)
+
+		// Assert
+		val states = stateFlow.take(2).toList()
+		assertEquals(expectedStateLoading, states[0])
+		assertEquals(expectedStateLoaded, states[1])
+	}
+
+	@Test
 	fun clearSearchQuery() {
 	}
 }
