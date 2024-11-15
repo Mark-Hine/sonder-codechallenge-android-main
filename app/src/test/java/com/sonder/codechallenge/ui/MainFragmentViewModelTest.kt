@@ -1,18 +1,44 @@
 package com.sonder.codechallenge.ui
 
+import androidx.lifecycle.SavedStateHandle
+import com.sonder.codechallenge.ui.util.MainDispatcherRule
+import com.sonder.data.models.SearchItemViewType
+import com.sonder.data.repositories.SearchRepositoryImpl
+import com.sonder.domain.usecases.search.GetSectionSearchResultsUseCase
+import com.sonder.domain.usecases.search.SubscribeToSearchQueryUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class MainFragmentViewModelTest {
 
-    private lateinit var viewModel: MainFragmentViewModel
+	@get:Rule
+	val dispatcherRule = MainDispatcherRule()
 
-    @Test
-    fun onCreate() {
-    }
+	private val savedStateHandle = SavedStateHandle()
+	private val searchRepository = SearchRepositoryImpl()
+	private val subscribeToSearchQueryUseCase = SubscribeToSearchQueryUseCase(searchRepository)
+	private val getSectionSearchResultsUseCase = GetSectionSearchResultsUseCase(searchRepository)
 
-    @Test
-    fun getSectionSearchResults() {
-    }
+	private lateinit var viewModel: MainFragmentViewModel
+
+	@Before
+	fun setup() {
+		savedStateHandle[SEARCH_ITEM_VIEW_TYPE] = SearchItemViewType.HORIZONTAL_COMPACT
+		viewModel = MainFragmentViewModel(
+			savedStateHandle = savedStateHandle,
+			subscribeToSearchQueryUseCase = subscribeToSearchQueryUseCase,
+			getSectionSearchResultsUseCase = getSectionSearchResultsUseCase,
+		)
+	}
+
+	@Test
+	fun onCreate() {
+	}
+
+	@Test
+	fun getSectionSearchResults() {
+	}
 }
