@@ -2,11 +2,17 @@ package com.sonder.codechallenge.ui
 
 import androidx.lifecycle.SavedStateHandle
 import com.sonder.codechallenge.ui.util.MainDispatcherRule
+import com.sonder.data.MockRequests
+import com.sonder.data.MockResponses
 import com.sonder.data.models.SearchItemViewType
+import com.sonder.data.models.applyParamFilters
 import com.sonder.data.repositories.SearchRepositoryImpl
 import com.sonder.domain.usecases.search.GetSectionSearchResultsUseCase
 import com.sonder.domain.usecases.search.SubscribeToSearchQueryUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -42,6 +48,23 @@ class MainFragmentViewModelTest {
 	}
 
 	@Test
-	fun getSectionSearchResults() {
+	fun stateIsLoaded_withMockSearchQuery_andHorizontalCompactViewType() = runTest {
+		// Arrange
+		val query = "mock"
+		val request = MockRequests.horizontalCompactRequestParams
+		val result = MockResponses.getHorizontalCompactSearchResults().first().applyParamFilters(request)
+		val expectedStateLoaded = SearchFragmentStates.Loaded(
+			sectionTitle = result.sectionTitle,
+			sectionDescription = result.sectionDescription,
+			searchItemViewType = SearchItemViewType.HORIZONTAL_COMPACT,
+			adapterItems = result.items,
+		)
+
+		// Act
+		viewModel.getSectionSearchResults(query)
+
+		// Assert
+		val actualState = viewModel.state.take(2).last()
+		assertEquals(expectedStateLoaded, actualState)
 	}
 }
