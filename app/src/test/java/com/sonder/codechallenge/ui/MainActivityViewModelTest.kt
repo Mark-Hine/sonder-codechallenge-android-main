@@ -102,6 +102,19 @@ class MainActivityViewModelTest {
 	}
 
 	@Test
-	fun clearSearchQuery() {
+	fun stateIsStarted_whenClearSearchQuery() {
+		// Arrange
+		val expectedStateStarted = SearchActivityStates.Started
+		viewModel.updateSearchQuery("mock")
+
+		// Assert initial state
+		val initialState = viewModel.state.value
+		assert(initialState is SearchActivityStates.Loading || initialState is SearchActivityStates.Loaded)
+
+		// Act
+		viewModel.clearSearchQuery()
+
+		// Assert
+		assertEquals(expectedStateStarted, viewModel.state.value)
 	}
 }
