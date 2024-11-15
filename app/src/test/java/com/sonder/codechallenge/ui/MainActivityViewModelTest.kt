@@ -56,15 +56,14 @@ class MainActivityViewModelTest {
 				SearchItemViewType.VERTICAL_DETAILED
 			),
 		)
-		val stateFlow = viewModel.state
 
 		// Act
 		viewModel.updateSearchQuery(query)
 
 		// Assert
-		val states = stateFlow.take(2).toList()
-		assertEquals(expectedStateLoading, states[0])
-		assertEquals(expectedStateLoaded, states[1])
+		val actualStates = viewModel.state.take(2).toList()
+		assertEquals(expectedStateLoading, actualStates[0])
+		assertEquals(expectedStateLoaded, actualStates[1])
 	}
 
 	@Test
@@ -76,15 +75,30 @@ class MainActivityViewModelTest {
 			query = query,
 			searchItemViewTypes = emptyList(),
 		)
-		val stateFlow = viewModel.state
 
 		// Act
 		viewModel.updateSearchQuery(query)
 
 		// Assert
-		val states = stateFlow.take(2).toList()
-		assertEquals(expectedStateLoading, states[0])
-		assertEquals(expectedStateLoaded, states[1])
+		val actualStates = viewModel.state.take(2).toList()
+		assertEquals(expectedStateLoading, actualStates[0])
+		assertEquals(expectedStateLoaded, actualStates[1])
+	}
+
+	@Test
+	fun stateIsError_withErrorSearchQuery() = runTest {
+		// Arrange
+		val query = "error"
+		val expectedStateLoading = SearchActivityStates.Loading(query)
+		val expectedStateError = SearchActivityStates.Error
+
+		// Act
+		viewModel.updateSearchQuery(query)
+
+		// Assert
+		val actualStates = viewModel.state.take(2).toList()
+		assertEquals(expectedStateLoading, actualStates[0])
+		assertEquals(expectedStateError, actualStates[1])
 	}
 
 	@Test
