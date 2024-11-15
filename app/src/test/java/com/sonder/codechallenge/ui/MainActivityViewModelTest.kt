@@ -6,6 +6,8 @@ import com.sonder.data.repositories.SearchRepositoryImpl
 import com.sonder.domain.usecases.search.ClearSearchResultsUseCase
 import com.sonder.domain.usecases.search.GetSectionSearchResultsUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -32,7 +34,8 @@ class MainActivityViewModelTest {
 	}
 
 	@Test
-	fun onCreate() {
+	fun stateIsInitiallyStarted() = runTest {
+		assertEquals(SearchActivityStates.Started, viewModel.state.value)
 	}
 
 	@Test
