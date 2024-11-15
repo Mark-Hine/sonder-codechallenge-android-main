@@ -1,7 +1,8 @@
 package com.sonder.codechallenge.ui
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.sonder.codechallenge.ui.base.BaseViewModel
 import com.sonder.common.result.Result
 import com.sonder.common.result.asResult
 import com.sonder.data.models.SearchItemViewType
@@ -9,25 +10,21 @@ import com.sonder.domain.usecases.search.ClearSearchResultsUseCase
 import com.sonder.domain.usecases.search.GetSectionSearchResultsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
+	savedStateHandle: SavedStateHandle,
 	private val clearSearchResultsUseCase: ClearSearchResultsUseCase,
 	private val getSectionSearchResultsUseCase: GetSectionSearchResultsUseCase,
-) : ViewModel() {
+) : BaseViewModel<SearchActivityStates>(SearchActivityStates.Started, savedStateHandle) {
 
 	private var getAllSectionSearchResultsJob: Job? = null
-	private val _state: MutableStateFlow<SearchActivityStates> = MutableStateFlow(SearchActivityStates.Started)
-	val state = _state.asStateFlow()
 
 	fun updateSearchQuery(query: String) {
 		clearSearchResults()
@@ -36,7 +33,7 @@ class MainActivityViewModel @Inject constructor(
 
 	fun clearSearchQuery() {
 		clearSearchResults()
-		_state.update { SearchActivityStates.Started }
+		updateState(SearchActivityStates.Started)
 	}
 
 	private fun clearSearchResults() {
@@ -64,7 +61,7 @@ class MainActivityViewModel @Inject constructor(
 			.onEach { result ->
 				when (result) {
 					is Result.Loading -> {
-						_state.update { SearchActivityStates.Loading(query) }
+						updateState(SearchActivityStates.Loading(query))
 					}
 
 					is Result.Success -> {
@@ -75,11 +72,11 @@ class MainActivityViewModel @Inject constructor(
 							.map { it.first.searchItemViewType }
 							// Sort the results by the order of the enum
 							.sorted()
-						_state.update { SearchActivityStates.Loaded(query, searchItemViewTypes) }
+						updateState(SearchActivityStates.Loaded(query, searchItemViewTypes))
 					}
 
 					is Result.Error -> {
-						_state.update { SearchActivityStates.Error }
+						updateState(SearchActivityStates.Error)
 					}
 				}
 			}.launchIn(viewModelScope)

@@ -1,8 +1,8 @@
 package com.sonder.codechallenge.ui
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sonder.codechallenge.ui.base.BaseViewModel
 import com.sonder.common.result.Result
 import com.sonder.common.result.asResult
 import com.sonder.data.models.SearchItemViewType
@@ -10,12 +10,9 @@ import com.sonder.domain.usecases.search.GetSectionSearchResultsUseCase
 import com.sonder.domain.usecases.search.SubscribeToSearchQueryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,12 +20,10 @@ class MainFragmentViewModel @Inject constructor(
 	savedStateHandle: SavedStateHandle,
 	private val subscribeToSearchQueryUseCase: SubscribeToSearchQueryUseCase,
 	private val getSectionSearchResultsUseCase: GetSectionSearchResultsUseCase,
-) : ViewModel() {
+) : BaseViewModel<SearchFragmentStates>(SearchFragmentStates.Started, savedStateHandle) {
 
 	val searchItemViewType: SearchItemViewType = requireNotNull(savedStateHandle[SEARCH_ITEM_VIEW_TYPE])
 	private var getSectionSearchResultsJob: Job? = null
-	private val _state: MutableStateFlow<SearchFragmentStates> = MutableStateFlow(SearchFragmentStates.Started)
-	val state = _state.asStateFlow()
 
 	fun onCreate() {
 		subscribeToSearchQueryUseCase.execute(Unit)
@@ -56,14 +51,14 @@ class MainFragmentViewModel @Inject constructor(
 				when (result) {
 					is Result.Success -> {
 						val (sectionTitle, sectionDescription, items) = result.data
-						_state.update {
+						updateState(
 							SearchFragmentStates.Loaded(
 								sectionTitle = sectionTitle,
 								sectionDescription = sectionDescription,
 								searchItemViewType = searchItemViewType,
 								adapterItems = items,
 							)
-						}
+						)
 					}
 
 					else -> Unit

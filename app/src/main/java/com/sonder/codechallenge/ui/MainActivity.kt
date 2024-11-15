@@ -45,9 +45,10 @@ class MainActivity : AppCompatActivity() {
 		binding.tvSearchTitle.text = getSearchTitleText(state)
 
 		// Update fragments
-		removeAllFragments()
 		if (state is SearchActivityStates.Loaded) {
 			addFragments(state.searchItemViewTypes)
+		} else {
+			removeAllFragments()
 		}
 	}
 
